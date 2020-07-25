@@ -1,5 +1,5 @@
 /build/*
-/bin/*_d.*
+/bin/lua_bridge_jit_wrapper*
 /_objs/*
 /libs/*
 *.suo

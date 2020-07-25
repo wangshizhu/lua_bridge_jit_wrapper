@@ -88,9 +88,9 @@ namespace lua_script
 
 	void ScriptManager::BrowseFileName(const char* dir, std::vector<std::string>& out)
 	{
-		const std::filesystem::path path{ dir };
+		const std::filesystem::path p{ dir };
 
-		for (const auto& entry : std::filesystem::directory_iterator(path))
+		for (const auto& entry : std::filesystem::directory_iterator(p))
 		{
 			const auto file_name = entry.path().string();
 

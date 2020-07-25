@@ -1,16 +1,18 @@
 #ifndef SCRIPT_MANAGER_H_
 #define SCRIPT_MANAGER_H_
 
+#include <cstring>
 #include <string>
 #include <vector>
 #include <map>
-#include "lua\lua.hpp"
-#include "LuaBridge\LuaBridge.h"
+#include <memory>
+#include "lua/lua.hpp"
+#include "LuaBridge/LuaBridge.h"
 
 extern "C"
 {
-#include "lua\lua.h"  
-#include "lua\lualib.h"
+#include "lua/lua.h"  
+#include "lua/lualib.h"
 }
 
 namespace lua_script

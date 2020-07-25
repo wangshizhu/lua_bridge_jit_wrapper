@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 
 set(EXECUTABLE_OUTPUT_PATH ../bin)
-set(CMAKE_CXX_FLAGS "-g -std=c++17 -pthread -lstdc++fs")
+set(CMAKE_CXX_FLAGS "-g -std=c++17 -pthread -ldl -lstdc++fs")
 
 project(lua_bridge_jit_wrapper VERSION 1.0)
 
@@ -21,7 +21,7 @@ source_group("Header" FILES ${CURRENT_HEADERS})
 aux_source_directory(. DIR_SRCS)
 add_executable(lua_bridge_jit_wrapper ${DIR_SRCS} ${CURRENT_HEADERS})
 
-target_link_libraries(lua_bridge_jit_wrapper ${CMAKE_CURRENT_SOURCE_DIR}/../lib/luajit51.a)
+target_link_libraries(lua_bridge_jit_wrapper ${CMAKE_CURRENT_SOURCE_DIR}/../lib/luajit51.a stdc++fs)
 
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 17)

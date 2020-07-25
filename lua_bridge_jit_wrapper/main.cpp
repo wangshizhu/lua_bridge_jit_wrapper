@@ -8,7 +8,7 @@ int main()
 
 		if (!sm.LoadScript())
 		{
-			std::cout << "load faild" << std::endl;
+			std::cout << "script load faild" << std::endl;
 		}
 
 		sm.CallScriptFun(1, "test_func_1",10,"joey");

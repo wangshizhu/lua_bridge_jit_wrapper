@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <iostream>
 #include <memory>
 #include "lua/lua.hpp"
 #include "LuaBridge/LuaBridge.h"
@@ -14,6 +15,19 @@ extern "C"
 #include "lua/lua.h"  
 #include "lua/lualib.h"
 }
+
+#define TRY try{
+
+#define CATCH }catch (luabridge::LuaException const& e){ \
+std::cout<<"file:"<<__FILE__<<",line:"<<__LINE__<<",function:"<<__FUNCTION__<<",what:"<<e.what()<<std::endl; \
+} \
+catch (std::exception& e){ \
+std::cout<<"file:"<<__FILE__<<",line:"<<__LINE__<<",function:"<<__FUNCTION__<<",what:"<<e.what()<<std::endl; \
+} \
+catch (...){ \
+std::cout<<"file:"<<__FILE__<<",line:"<<__LINE__<<",function:"<<__FUNCTION__<<std::endl; \
+}
+
 
 namespace lua_script
 {
@@ -35,6 +49,8 @@ namespace lua_script
 		template<typename... Args>
 		void CallScriptFun(int module_id, const char* func_name, Args&&... args)
 		{
+			TRY
+
 			auto&& iter = lua_fun_.find(module_id);
 			if (iter == lua_fun_.cend())
 			{
@@ -48,6 +64,8 @@ namespace lua_script
 			}
 
 			(*func_iter->second)(std::forward<decltype(args)>(args)...);
+
+			CATCH
 		}
 
 		static void BrowseFileName(const char* dir, std::vector<std::string>& out);

@@ -1,5 +1,4 @@
 #include "script_manager.h"
-#include <iostream>
 #include <filesystem>
 
 namespace lua_script
@@ -20,6 +19,8 @@ namespace lua_script
 
 	bool ScriptManager::LoadScript()
 	{
+		TRY
+
 		std::vector<std::string> file_names;
 		ScriptManager::BrowseFileName(dir_.c_str(), file_names);
 		if (file_names.size() == 0)
@@ -80,10 +81,12 @@ namespace lua_script
 				continue;
 			}
 
-			lua_fun_.emplace(std::pair<int, TypeFuncMap>(module_id,module_fun));
+			lua_fun_.emplace(std::make_pair(module_id,module_fun));
 		}
 
 		return true;
+
+		CATCH
 	}
 
 	void ScriptManager::BrowseFileName(const char* dir, std::vector<std::string>& out)
